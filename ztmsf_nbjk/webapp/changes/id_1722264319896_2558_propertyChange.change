@@ -1,0 +1,41 @@
+{
+    "fileName": "id_1722264319896_2558_propertyChange",
+    "fileType": "change",
+    "changeType": "propertyChange",
+    "moduleName": "",
+    "reference": "ztmsfnbjk",
+    "packageName": "",
+    "content": {
+        "property": "width",
+        "newValue": "170px"
+    },
+    "selector": {
+        "id": "ztmsfnbjk::sap.suite.ui.generic.template.ListReport.view.ListReport::ZTMS_C_NBJK--listReport-budat",
+        "idIsLocal": false,
+        "type": "sap.m.Column"
+    },
+    "layer": "CUSTOMER_BASE",
+    "texts": {},
+    "namespace": "apps/ztmsfnbjk/changes/",
+    "projectId": "",
+    "creation": 1722264319896,
+    "originalLanguage": "",
+    "support": {
+        "generator": "changeUtils: SAPFioriTools",
+        "service": "",
+        "user": "",
+        "sapui5Version": "1.71.58",
+        "sourceChangeFileName": "",
+        "compositeCommand": ""
+    },
+    "oDataInformation": {},
+    "dependentSelector": {},
+    "validAppVersions": {
+        "from": "0.0.1",
+        "to": "0.0.1",
+        "creation": "0.0.1"
+    },
+    "jsOnly": false,
+    "variantReference": "",
+    "appDescriptorChange": false
+}

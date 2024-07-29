@@ -1,0 +1,23 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:table="sap.ui.table" xmlns="sap.m">
+    
+    <table:AnalyticalColumn width="180px" id="FioriTools::sq_id_ext">
+        <Label text="计提单号"/>
+        <table:template>
+            <Link id="idSqidLink" text="{sq_id}" wrapping="true" press="onSqidPress"/>
+        </table:template>
+        <table:customData>
+            <core:CustomData key="p13nData" value="\{&quot;columnIndex&quot;: &quot;0&quot;, &quot;leadingProperty&quot;: &quot;sq_id&quot;, &quot;columnKey&quot;: &quot;sq_id_ext&quot;}"/>
+        </table:customData>
+    </table:AnalyticalColumn>
+
+    <table:AnalyticalColumn width="200px" id="FioriTools::htdj_id_ext">
+        <Label text="合同登记单号"/>
+        <table:template>
+            <Link id="idHtdjLink" text="{htdj_id}" wrapping="true" press="onHtdjPress"/>
+        </table:template>
+        <table:customData>
+            <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;htdj_id_ext&quot;, &quot;columnIndex&quot;: &quot;1&quot;, &quot;leadingProperty&quot;: &quot;htdj_id&quot;}"/>
+        </table:customData>
+    </table:AnalyticalColumn>
+    
+</core:FragmentDefinition>
