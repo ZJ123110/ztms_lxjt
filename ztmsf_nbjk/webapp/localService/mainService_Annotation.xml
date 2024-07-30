@@ -43,6 +43,9 @@
             <Annotations Target="ZTMS_NBJK_SRV.ZTMS_C_NBJKType/to_DBukrs">
                 <Annotation Term="UI.HiddenFilter"/>
             </Annotations>
+            <Annotations Target="ZTMS_NBJK_SRV.ZTMS_C_NBJKType/to_ht">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
             <Annotations Target="ZTMS_NBJK_SRV.ZTMS_C_NBJKType/to_Jkqx">
                 <Annotation Term="UI.HiddenFilter"/>
             </Annotations>
@@ -73,9 +76,6 @@
             <Annotations Target="ZTMS_NBJK_SRV.ZTMS_C_NBJKType/to_Status">
                 <Annotation Term="UI.HiddenFilter"/>
             </Annotations>
-            <Annotations Target="ZTMS_NBJK_SRV.ZTMS_C_NBJKType/zhtmc_fc">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
             <Annotations Target="ZTMS_NBJK_SRV.ZTMS_C_NBJKType/ID">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
@@ -83,47 +83,47 @@
                 <Annotation Term="Common.SemanticObject" String="AccountingDocument"/>
             </Annotations>
             <Annotations Target="ZTMS_NBJK_SRV.ZTMS_C_NBJKType/jtdw">
-                <Annotation Term="Common.Text" Path="to_Jtdw/DText">
+                <Annotation Term="Common.Text" Path="jtdw_Text">
                     <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
                 </Annotation>
             </Annotations>
             <Annotations Target="ZTMS_NBJK_SRV.ZTMS_C_NBJKType/d_name1">
-                <Annotation Term="Common.Text" Path="to_DBukrs/text">
+                <Annotation Term="Common.Text" Path="d_name1_Text">
                     <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst"/>
                 </Annotation>
             </Annotations>
             <Annotations Target="ZTMS_NBJK_SRV.ZTMS_C_NBJKType/c_name1">
-                <Annotation Term="Common.Text" Path="to_CBukrs/text">
+                <Annotation Term="Common.Text" Path="c_name1_Text">
                     <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst"/>
                 </Annotation>
             </Annotations>
             <Annotations Target="ZTMS_NBJK_SRV.ZTMS_C_NBJKType/kostl">
-                <Annotation Term="Common.Text" Path="to_Kostl/ltext">
+                <Annotation Term="Common.Text" Path="kostl_Text">
                     <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst"/>
                 </Annotation>
             </Annotations>
             <Annotations Target="ZTMS_NBJK_SRV.ZTMS_C_NBJKType/prctr">
-                <Annotation Term="Common.Text" Path="to_Prctr/ltext">
+                <Annotation Term="Common.Text" Path="prctr_Text">
                     <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst"/>
                 </Annotation>
             </Annotations>
             <Annotations Target="ZTMS_NBJK_SRV.ZTMS_C_NBJKType/finan_type">
-                <Annotation Term="Common.Text" Path="to_Rzlx/domainText">
+                <Annotation Term="Common.Text" Path="finan_type_Text">
                     <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
                 </Annotation>
             </Annotations>
             <Annotations Target="ZTMS_NBJK_SRV.ZTMS_C_NBJKType/nature">
-                <Annotation Term="Common.Text" Path="to_Jkqx/DText">
+                <Annotation Term="Common.Text" Path="nature_Text">
                     <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
                 </Annotation>
             </Annotations>
             <Annotations Target="ZTMS_NBJK_SRV.ZTMS_C_NBJKType/borr_or_return">
-                <Annotation Term="Common.Text" Path="to_Sfxz/domainText">
+                <Annotation Term="Common.Text" Path="borr_or_return_Text">
                     <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
                 </Annotation>
             </Annotations>
             <Annotations Target="ZTMS_NBJK_SRV.ZTMS_C_NBJKType/status">
-                <Annotation Term="Common.Text" Path="to_Status/DText">
+                <Annotation Term="Common.Text" Path="status_Text">
                     <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
                 </Annotation>
             </Annotations>
@@ -139,6 +139,12 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="jtdw"/>
                             <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="borr_or_return_Text"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="finan_type_Text"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="d_name1"/>
@@ -271,12 +277,15 @@
                         <PropertyPath>d_name1</PropertyPath>
                         <PropertyPath>c_name1</PropertyPath>
                         <PropertyPath>jtdw</PropertyPath>
+                        <PropertyPath>borr_or_return_Text</PropertyPath>
                         <PropertyPath>nature</PropertyPath>
+                        <PropertyPath>finan_type_Text</PropertyPath>
                         <PropertyPath>qxr</PropertyPath>
                         <PropertyPath>jzr</PropertyPath>
                         <PropertyPath>budat</PropertyPath>
                         <PropertyPath>borr_or_return</PropertyPath>
                         <PropertyPath>sq_id</PropertyPath>
+                        <PropertyPath>prctr_Text</PropertyPath>
                         <PropertyPath>htdj_id</PropertyPath>
                         <PropertyPath>zhtmc</PropertyPath>
                     </Collection>

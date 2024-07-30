@@ -120,6 +120,19 @@
                             "className": "sap.ui.core.Fragment"
                         }
                     }
+                },
+                "sap.ui.controllerExtensions": {
+                    "sap.suite.ui.generic.template.ListReport.view.ListReport": {
+                        "controllerName": "ztmsfnbjk.ext.controller.ListReportExt",
+                        "sap.ui.generic.app": {
+                            "ZTMS_C_NBJK": {
+                                "EntitySet": "ZTMS_C_NBJK",
+                                "Actions": {
+                                    
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
