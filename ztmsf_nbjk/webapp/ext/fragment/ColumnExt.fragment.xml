@@ -10,7 +10,7 @@
         </table:customData>
     </table:AnalyticalColumn>
 
-    <table:AnalyticalColumn width="200px" id="FioriTools::htdj_id_ext">
+    <table:AnalyticalColumn width="250px" id="FioriTools::htdj_id_ext">
         <Label text="合同登记单号"/>
         <table:template>
             <Link id="idHtdjLink" text="{htdj_id}" wrapping="true" press="onHtdjPress"/>

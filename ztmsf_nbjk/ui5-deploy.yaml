@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: ztmsfnbjk
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          url: https://dev.cgdg.com:50015
+          client: "500"
+        app:
+          name: ZTMSF_NBJK
+          description: 内部借款-利息计提台账
+          package: ZTMS_LXJT
+          transport: LNDK947717
+        exclude:
+          - /test/

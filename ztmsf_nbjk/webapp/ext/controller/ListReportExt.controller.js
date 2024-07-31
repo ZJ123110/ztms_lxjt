@@ -10,9 +10,9 @@ sap.ui.define([
             window.open(url);
         },
         onHtdjPress: function(oEvent) {
-            // var oClickedRowData = oEvent.getSource().getBindingContext().getObject();
-            // let url = window.location.origin + "/home/index.html?saml2=disabled#ZTMSF_NBJK_HTDJ-manage&//ZTMS_C_JHTDJ(db_key=guid'" + oClickedRowData.ht_key + "',IsActiveEntity=true)";
-            // window.open(url);
+            var oClickedRowData = oEvent.getSource().getBindingContext().getObject();
+            let url = window.location.origin + "/home/index.html?saml2=disabled#ZTMSF_NBJK_HTDJ-manage&//ZTMS_C_JHTDJ(db_key=guid'" + oClickedRowData.ht_key + "',IsActiveEntity=true)";
+            window.open(url);
         }
     };
 });
