@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri=".15/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri=".15/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri=".15/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri=".15/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri=".15/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZTMS_C_WBRZ_SRV" xml:lang="zh" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="ZERS_I_KOSTLType" sap:label="成本中心搜索帮助" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="kostl"/>
+                </Key>
+                <Property Name="kostl" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="ltext" sap:label="成本中心"/>
+                <Property Name="bukrs" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="公司代码"/>
+                <Property Name="ltext" Type="Edm.String" MaxLength="20" sap:label="成本中心描述" sap:quickinfo="一般姓名"/>
+                <Property Name="prctr" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:text="ltext2" sap:label="利润中心"/>
+                <Property Name="ltext2" Type="Edm.String" MaxLength="40" sap:label="利润中心描述" sap:quickinfo="长文本"/>
+            </EntityType>
+            <EntityType Name="ZERS_I_PRCTRType" sap:label="利润中心搜索帮助" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="prctr"/>
+                </Key>
+                <Property Name="prctr" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="ltext" sap:label="利润中心"/>
+                <Property Name="ltext" Type="Edm.String" MaxLength="40" sap:label="描述" sap:quickinfo="长文本"/>
+                <Property Name="datbi" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="有效截至日" sap:quickinfo="有效截至日期"/>
+                <Property Name="kokrs" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="成本控制域" sap:quickinfo="控制范围"/>
+                <Property Name="datab" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="有效期自" sap:quickinfo="开始生效日期"/>
+            </EntityType>
+            <EntityType Name="ZTMS_C_JKXZ_VHType" sap:label="借款性质" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DValue"/>
+                </Key>
+                <Property Name="DValue" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="DText" sap:label="值" sap:quickinfo="域值：单值/上限"/>
+                <Property Name="DText" Type="Edm.String" MaxLength="60" sap:label="描述" sap:quickinfo="固定值的短文本"/>
+            </EntityType>
+            <EntityType Name="ZTMS_C_STAT80Type" sap:label="利息计提状态" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DValue"/>
+                </Key>
+                <Property Name="DValue" Type="Edm.String" Nullable="false" MaxLength="5" sap:display-format="UpperCase" sap:text="DText" sap:label="单据类型" sap:quickinfo="申请单状态"/>
+                <Property Name="DText" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="描述"/>
+                <Property Name="color" Type="Edm.Byte" sap:label="状态颜色"/>
+            </EntityType>
+            <EntityType Name="ZTMS_C_WBRZType" sap:semantics="aggregate" sap:label="外部融资-利息计提台账" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="db_key" Type="Edm.Guid" sap:aggregation-role="dimension" sap:label="NodeID" sap:heading=""/>
+                <Property Name="parent_key" Type="Edm.Guid" sap:aggregation-role="dimension" sap:label="NodeID" sap:heading=""/>
+                <Property Name="ht_key" Type="Edm.Guid" sap:aggregation-role="dimension" sap:label="NodeID" sap:heading=""/>
+                <Property Name="sq_id" Type="Edm.String" MaxLength="32" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="计提单号" sap:quickinfo="申请单号"/>
+                <Property Name="conex" Type="Edm.String" MaxLength="40" sap:aggregation-role="dimension" sap:label="合同登记单号" sap:quickinfo="绿法合同号"/>
+                <Property Name="htdj_id" Type="Edm.String" MaxLength="32" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="借款合同编号" sap:quickinfo="单据编号"/>
+                <Property Name="jtdw" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:text="jtdw_Text" sap:label="计提单位"/>
+                <Property Name="jtdw_Text" Type="Edm.String" MaxLength="60" sap:label="描述" sap:quickinfo="固定值的短文本" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="kostl" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:text="kostl_Text" sap:label="成本中心"/>
+                <Property Name="kostl_Text" Type="Edm.String" MaxLength="20" sap:label="成本中心描述" sap:quickinfo="一般姓名" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="prctr" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:text="prctr_Text" sap:label="利润中心"/>
+                <Property Name="prctr_Text" Type="Edm.String" MaxLength="40" sap:label="描述" sap:quickinfo="长文本" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="zhtmc" Type="Edm.String" MaxLength="80" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="合同名称"/>
+                <Property Name="nature" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:text="nature_Text" sap:label="借款性质"/>
+                <Property Name="nature_Text" Type="Edm.String" MaxLength="60" sap:label="描述" sap:quickinfo="固定值的短文本" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="currency" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:label="币种" sap:quickinfo="货币代码" sap:semantics="currency-code"/>
+                <Property Name="qxr" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="起息日"/>
+                <Property Name="jzr" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="截止日"/>
+                <Property Name="jxts" Type="Edm.Int16" sap:aggregation-role="dimension" sap:label="计息天数"/>
+                <Property Name="zclx_amt" Type="Edm.Decimal" Precision="23" Scale="2" sap:aggregation-role="measure" sap:label="正常利息" sap:filterable="false"/>
+                <Property Name="wctz" Type="Edm.Decimal" Precision="23" Scale="2" sap:aggregation-role="measure" sap:label="尾差调整" sap:filterable="false"/>
+                <Property Name="jtlx_amt" Type="Edm.Decimal" Precision="23" Scale="2" sap:aggregation-role="measure" sap:label="计提利息" sap:filterable="false"/>
+                <Property Name="fyh_amt" Type="Edm.Decimal" Precision="23" Scale="2" sap:aggregation-role="measure" sap:label="费用化利息" sap:quickinfo="费用化金额" sap:filterable="false"/>
+                <Property Name="zbh_amt" Type="Edm.Decimal" Precision="23" Scale="2" sap:aggregation-role="measure" sap:label="资本化利息" sap:quickinfo="资本化金额" sap:filterable="false"/>
+                <Property Name="zzs" Type="Edm.Decimal" Precision="23" Scale="2" sap:aggregation-role="measure" sap:label="增值税" sap:filterable="false"/>
+                <Property Name="tzsy" Type="Edm.Decimal" Precision="23" Scale="2" sap:aggregation-role="measure" sap:label="投资收益" sap:filterable="false"/>
+                <Property Name="ht_amt" Type="Edm.Decimal" Precision="23" Scale="2" sap:aggregation-role="measure" sap:label="合同金额" sap:filterable="false"/>
+                <Property Name="whk_amt" Type="Edm.Decimal" Precision="23" Scale="2" sap:aggregation-role="measure" sap:label="未还款金额" sap:filterable="false"/>
+                <Property Name="belnr" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="凭证编号" sap:quickinfo="会计凭证号码"/>
+                <Property Name="budat" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="过账日期" sap:quickinfo="凭证中的过账日期" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="status" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:text="status_Text" sap:label="单据状态" sap:quickinfo="申请单状态"/>
+                <Property Name="status_Text" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="描述" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="monat" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="会计期间" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="gjahr" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="会计年度" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="exe_rate" Type="Edm.Decimal" Precision="12" Scale="5" sap:aggregation-role="dimension" sap:label="执行利率"/>
+                <Property Name="sap_rzlxbm" Type="Edm.String" MaxLength="20" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="SAP融资类型" sap:quickinfo="融资类型编码"/>
+                <Property Name="zhtbh" Type="Edm.String" MaxLength="18" sap:aggregation-role="dimension" sap:label="管控合同编号" sap:quickinfo="合同编号"/>
+                <NavigationProperty Name="to_ht" Relationship="ZTMS_C_WBRZ_SRV.assoc_EC38041FCD897B5FBF8692026E0B0D81" FromRole="FromRole_assoc_EC38041FCD897B5FBF8692026E0B0D81" ToRole="ToRole_assoc_EC38041FCD897B5FBF8692026E0B0D81"/>
+                <NavigationProperty Name="to_Jkqx" Relationship="ZTMS_C_WBRZ_SRV.assoc_36164C27746083154E57AB4E161BAC99" FromRole="FromRole_assoc_36164C27746083154E57AB4E161BAC99" ToRole="ToRole_assoc_36164C27746083154E57AB4E161BAC99"/>
+                <NavigationProperty Name="to_Jtdw" Relationship="ZTMS_C_WBRZ_SRV.assoc_AC4309F45232C6735DDEDFB86323EAC6" FromRole="FromRole_assoc_AC4309F45232C6735DDEDFB86323EAC6" ToRole="ToRole_assoc_AC4309F45232C6735DDEDFB86323EAC6"/>
+                <NavigationProperty Name="to_Jtht" Relationship="ZTMS_C_WBRZ_SRV.assoc_EA00B19AB7FC4C9B1EE955C81250F103" FromRole="FromRole_assoc_EA00B19AB7FC4C9B1EE955C81250F103" ToRole="ToRole_assoc_EA00B19AB7FC4C9B1EE955C81250F103"/>
+                <NavigationProperty Name="to_Kostl" Relationship="ZTMS_C_WBRZ_SRV.assoc_9CB2538314B4DF4538299231D4952E3E" FromRole="FromRole_assoc_9CB2538314B4DF4538299231D4952E3E" ToRole="ToRole_assoc_9CB2538314B4DF4538299231D4952E3E"/>
+                <NavigationProperty Name="to_Prctr" Relationship="ZTMS_C_WBRZ_SRV.assoc_283A659253E52761E63561153ED9FFAC" FromRole="FromRole_assoc_283A659253E52761E63561153ED9FFAC" ToRole="ToRole_assoc_283A659253E52761E63561153ED9FFAC"/>
+                <NavigationProperty Name="to_PzInfor" Relationship="ZTMS_C_WBRZ_SRV.assoc_6234F66CF2409A4DCEBF9709ABD996D9" FromRole="FromRole_assoc_6234F66CF2409A4DCEBF9709ABD996D9" ToRole="ToRole_assoc_6234F66CF2409A4DCEBF9709ABD996D9"/>
+                <NavigationProperty Name="to_Rzlx" Relationship="ZTMS_C_WBRZ_SRV.assoc_3856C5C5AC45107B6680CC36E58B2FBA" FromRole="FromRole_assoc_3856C5C5AC45107B6680CC36E58B2FBA" ToRole="ToRole_assoc_3856C5C5AC45107B6680CC36E58B2FBA"/>
+                <NavigationProperty Name="to_SapRzlx" Relationship="ZTMS_C_WBRZ_SRV.assoc_F14F13CF60C8D8884BDF92AF9F62901A" FromRole="FromRole_assoc_F14F13CF60C8D8884BDF92AF9F62901A" ToRole="ToRole_assoc_F14F13CF60C8D8884BDF92AF9F62901A"/>
+                <NavigationProperty Name="to_Status" Relationship="ZTMS_C_WBRZ_SRV.assoc_4CBABA8F9BFB427BE55781FCD51708CE" FromRole="FromRole_assoc_4CBABA8F9BFB427BE55781FCD51708CE" ToRole="ToRole_assoc_4CBABA8F9BFB427BE55781FCD51708CE"/>
+            </EntityType>
+            <EntityType Name="ZTMS_I_JTDWType" sap:label="计提单位" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DValue"/>
+                </Key>
+                <Property Name="DValue" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="DText" sap:label="值" sap:quickinfo="域值：单值/上限"/>
+                <Property Name="DText" Type="Edm.String" MaxLength="60" sap:label="描述" sap:quickinfo="固定值的短文本"/>
+            </EntityType>
+            <EntityType Name="ZTMS_I_JTHTType" sap:label="计提合同查询" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="djd_id"/>
+                </Key>
+                <Property Name="djd_id" Type="Edm.String" Nullable="false" MaxLength="32" sap:display-format="UpperCase" sap:text="contract_name" sap:label="资金申请单号"/>
+                <Property Name="ht_id" Type="Edm.String" MaxLength="40" sap:label="合同编号" sap:quickinfo="绿法合同号"/>
+                <Property Name="contract_name" Type="Edm.String" MaxLength="50" sap:display-format="UpperCase" sap:label="合同名称" sap:quickinfo="债券名称"/>
+                <Property Name="contract_amount" Type="Edm.Decimal" Precision="23" Scale="2" sap:label="合同金额"/>
+                <Property Name="form_code" Type="Edm.String" MaxLength="5"/>
+            </EntityType>
+            <EntityType Name="ZTMS_I_RZLXType" sap:label="融资类型" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="domainKey"/>
+                </Key>
+                <Property Name="domainKey" Type="Edm.String" Nullable="false" MaxLength="1" sap:display-format="UpperCase" sap:text="domainText" sap:label="融资类型"/>
+                <Property Name="domainText" Type="Edm.String" MaxLength="60" sap:label="简短描述" sap:quickinfo="固定值的短文本"/>
+            </EntityType>
+            <EntityType Name="ZTMS_I_SAPRZLXType" sap:label="SAP融资类型" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="sap_rzlxbm"/>
+                </Key>
+                <Property Name="sap_rzlxbm" Type="Edm.String" Nullable="false" MaxLength="20" sap:display-format="UpperCase" sap:label="SAP融资类型" sap:quickinfo="融资类型编码"/>
+                <Property Name="sap_rzlxbm_txt" Type="Edm.String" MaxLength="50" sap:display-format="UpperCase" sap:label="描述" sap:quickinfo="融资类型名称"/>
+            </EntityType>
+            <EntityType Name="ZTMS_I_TKHTType" sap:label="【搜索帮助】提款合同" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="d_zranl"/>
+                </Key>
+                <Property Name="d_zranl" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="债务人合同编号"/>
+                <Property Name="zhtmc" Type="Edm.String" MaxLength="80" sap:display-format="UpperCase" sap:label="合同名称"/>
+            </EntityType>
+            <EntityType Name="ZTMS_I_ZJSQ_PZXType" sap:label="资金支付单-凭证信息" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="db_key"/>
+                </Key>
+                <Property Name="db_key" Type="Edm.Guid" Nullable="false" sap:label="" sap:quickinfo="NodeID" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="parent_key" Type="Edm.Guid" sap:label="" sap:quickinfo="NodeID" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="parent_key_char" Type="Edm.String" MaxLength="32"/>
+                <Property Name="AccountingDocument" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="凭证编号" sap:quickinfo="会计凭证号码"/>
+                <Property Name="AccountingDocumentUrl" Type="Edm.String" MaxLength="255" sap:label="凭证Url" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="gkbelnr" Type="Edm.String" MaxLength="20" sap:label="管控凭证号" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="公司代码"/>
+                <Property Name="FiscalYear" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="会计年度" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="monat" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="会计期间" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="zdxlx" Type="Edm.String" MaxLength="2" sap:label="对象类型" sap:quickinfo="对账类型" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="blart" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="凭证类型" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="budat" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="过账日期" sap:quickinfo="凭证中的过账日期" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="sr_id" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="事务标识"/>
+                <Property Name="cxbukrs" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="公司代码"/>
+                <Property Name="cxgjahr" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="会计年度"/>
+                <Property Name="cxbelnr" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="凭证编号" sap:quickinfo="会计凭证号码"/>
+                <Property Name="created_date" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="创建日期" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="created_time" Type="Edm.Time" Precision="0" sap:label="创建时间" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="created_by" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="创建人" sap:quickinfo="创建者" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="changed_date" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="更改日期" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="changed_time" Type="Edm.Time" Precision="0" sap:label="更改时间" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="changed_by" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="更改人" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="changed_at" Type="Edm.DateTimeOffset" Precision="0" sap:label="时间戳" sap:quickinfo="简短格式的 UTC 时戳 (YYYYMMDDhhmmss)" sap:creatable="false" sap:updatable="false"/>
+            </EntityType>
+            <Association Name="assoc_36164C27746083154E57AB4E161BAC99" sap:content-version="1">
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZType" Multiplicity="1" Role="FromRole_assoc_36164C27746083154E57AB4E161BAC99"/>
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_C_JKXZ_VHType" Multiplicity="0..1" Role="ToRole_assoc_36164C27746083154E57AB4E161BAC99"/>
+            </Association>
+            <Association Name="assoc_AC4309F45232C6735DDEDFB86323EAC6" sap:content-version="1">
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZType" Multiplicity="1" Role="FromRole_assoc_AC4309F45232C6735DDEDFB86323EAC6"/>
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_I_JTDWType" Multiplicity="0..1" Role="ToRole_assoc_AC4309F45232C6735DDEDFB86323EAC6"/>
+            </Association>
+            <Association Name="assoc_EA00B19AB7FC4C9B1EE955C81250F103" sap:content-version="1">
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZType" Multiplicity="1" Role="FromRole_assoc_EA00B19AB7FC4C9B1EE955C81250F103"/>
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_I_JTHTType" Multiplicity="0..1" Role="ToRole_assoc_EA00B19AB7FC4C9B1EE955C81250F103"/>
+            </Association>
+            <Association Name="assoc_9CB2538314B4DF4538299231D4952E3E" sap:content-version="1">
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZType" Multiplicity="1" Role="FromRole_assoc_9CB2538314B4DF4538299231D4952E3E"/>
+                <End Type="ZTMS_C_WBRZ_SRV.ZERS_I_KOSTLType" Multiplicity="0..1" Role="ToRole_assoc_9CB2538314B4DF4538299231D4952E3E"/>
+            </Association>
+            <Association Name="assoc_283A659253E52761E63561153ED9FFAC" sap:content-version="1">
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZType" Multiplicity="1" Role="FromRole_assoc_283A659253E52761E63561153ED9FFAC"/>
+                <End Type="ZTMS_C_WBRZ_SRV.ZERS_I_PRCTRType" Multiplicity="0..1" Role="ToRole_assoc_283A659253E52761E63561153ED9FFAC"/>
+            </Association>
+            <Association Name="assoc_6234F66CF2409A4DCEBF9709ABD996D9" sap:content-version="1">
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZType" Multiplicity="1" Role="FromRole_assoc_6234F66CF2409A4DCEBF9709ABD996D9"/>
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_I_ZJSQ_PZXType" Multiplicity="*" Role="ToRole_assoc_6234F66CF2409A4DCEBF9709ABD996D9"/>
+            </Association>
+            <Association Name="assoc_3856C5C5AC45107B6680CC36E58B2FBA" sap:content-version="1">
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZType" Multiplicity="1" Role="FromRole_assoc_3856C5C5AC45107B6680CC36E58B2FBA"/>
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_I_RZLXType" Multiplicity="0..1" Role="ToRole_assoc_3856C5C5AC45107B6680CC36E58B2FBA"/>
+            </Association>
+            <Association Name="assoc_F14F13CF60C8D8884BDF92AF9F62901A" sap:content-version="1">
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZType" Multiplicity="1" Role="FromRole_assoc_F14F13CF60C8D8884BDF92AF9F62901A"/>
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_I_SAPRZLXType" Multiplicity="0..1" Role="ToRole_assoc_F14F13CF60C8D8884BDF92AF9F62901A"/>
+            </Association>
+            <Association Name="assoc_4CBABA8F9BFB427BE55781FCD51708CE" sap:content-version="1">
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZType" Multiplicity="1" Role="FromRole_assoc_4CBABA8F9BFB427BE55781FCD51708CE"/>
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_C_STAT80Type" Multiplicity="0..1" Role="ToRole_assoc_4CBABA8F9BFB427BE55781FCD51708CE"/>
+            </Association>
+            <Association Name="assoc_EC38041FCD897B5FBF8692026E0B0D81" sap:content-version="1">
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZType" Multiplicity="1" Role="FromRole_assoc_EC38041FCD897B5FBF8692026E0B0D81"/>
+                <End Type="ZTMS_C_WBRZ_SRV.ZTMS_I_TKHTType" Multiplicity="0..1" Role="ToRole_assoc_EC38041FCD897B5FBF8692026E0B0D81"/>
+            </Association>
+            <EntityContainer Name="ZTMS_C_WBRZ_SRV_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZERS_I_KOSTL" EntityType="ZTMS_C_WBRZ_SRV.ZERS_I_KOSTLType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZERS_I_PRCTR" EntityType="ZTMS_C_WBRZ_SRV.ZERS_I_PRCTRType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZTMS_C_JKXZ_VH" EntityType="ZTMS_C_WBRZ_SRV.ZTMS_C_JKXZ_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZTMS_C_STAT80" EntityType="ZTMS_C_WBRZ_SRV.ZTMS_C_STAT80Type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZTMS_C_WBRZ" EntityType="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZTMS_I_JTDW" EntityType="ZTMS_C_WBRZ_SRV.ZTMS_I_JTDWType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZTMS_I_JTHT" EntityType="ZTMS_C_WBRZ_SRV.ZTMS_I_JTHTType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZTMS_I_RZLX" EntityType="ZTMS_C_WBRZ_SRV.ZTMS_I_RZLXType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZTMS_I_SAPRZLX" EntityType="ZTMS_C_WBRZ_SRV.ZTMS_I_SAPRZLXType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZTMS_I_TKHT" EntityType="ZTMS_C_WBRZ_SRV.ZTMS_I_TKHTType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZTMS_I_ZJSQ_PZX" EntityType="ZTMS_C_WBRZ_SRV.ZTMS_I_ZJSQ_PZXType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_283A659253E52761E63561153ED9FFAC" Association="ZTMS_C_WBRZ_SRV.assoc_283A659253E52761E63561153ED9FFAC" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZTMS_C_WBRZ" Role="FromRole_assoc_283A659253E52761E63561153ED9FFAC"/>
+                    <End EntitySet="ZERS_I_PRCTR" Role="ToRole_assoc_283A659253E52761E63561153ED9FFAC"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_EC38041FCD897B5FBF8692026E0B0D81" Association="ZTMS_C_WBRZ_SRV.assoc_EC38041FCD897B5FBF8692026E0B0D81" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZTMS_C_WBRZ" Role="FromRole_assoc_EC38041FCD897B5FBF8692026E0B0D81"/>
+                    <End EntitySet="ZTMS_I_TKHT" Role="ToRole_assoc_EC38041FCD897B5FBF8692026E0B0D81"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_3856C5C5AC45107B6680CC36E58B2FBA" Association="ZTMS_C_WBRZ_SRV.assoc_3856C5C5AC45107B6680CC36E58B2FBA" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZTMS_C_WBRZ" Role="FromRole_assoc_3856C5C5AC45107B6680CC36E58B2FBA"/>
+                    <End EntitySet="ZTMS_I_RZLX" Role="ToRole_assoc_3856C5C5AC45107B6680CC36E58B2FBA"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_AC4309F45232C6735DDEDFB86323EAC6" Association="ZTMS_C_WBRZ_SRV.assoc_AC4309F45232C6735DDEDFB86323EAC6" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZTMS_C_WBRZ" Role="FromRole_assoc_AC4309F45232C6735DDEDFB86323EAC6"/>
+                    <End EntitySet="ZTMS_I_JTDW" Role="ToRole_assoc_AC4309F45232C6735DDEDFB86323EAC6"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_9CB2538314B4DF4538299231D4952E3E" Association="ZTMS_C_WBRZ_SRV.assoc_9CB2538314B4DF4538299231D4952E3E" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZTMS_C_WBRZ" Role="FromRole_assoc_9CB2538314B4DF4538299231D4952E3E"/>
+                    <End EntitySet="ZERS_I_KOSTL" Role="ToRole_assoc_9CB2538314B4DF4538299231D4952E3E"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_6234F66CF2409A4DCEBF9709ABD996D9" Association="ZTMS_C_WBRZ_SRV.assoc_6234F66CF2409A4DCEBF9709ABD996D9" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZTMS_C_WBRZ" Role="FromRole_assoc_6234F66CF2409A4DCEBF9709ABD996D9"/>
+                    <End EntitySet="ZTMS_I_ZJSQ_PZX" Role="ToRole_assoc_6234F66CF2409A4DCEBF9709ABD996D9"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_4CBABA8F9BFB427BE55781FCD51708CE" Association="ZTMS_C_WBRZ_SRV.assoc_4CBABA8F9BFB427BE55781FCD51708CE" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZTMS_C_WBRZ" Role="FromRole_assoc_4CBABA8F9BFB427BE55781FCD51708CE"/>
+                    <End EntitySet="ZTMS_C_STAT80" Role="ToRole_assoc_4CBABA8F9BFB427BE55781FCD51708CE"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_EA00B19AB7FC4C9B1EE955C81250F103" Association="ZTMS_C_WBRZ_SRV.assoc_EA00B19AB7FC4C9B1EE955C81250F103" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZTMS_C_WBRZ" Role="FromRole_assoc_EA00B19AB7FC4C9B1EE955C81250F103"/>
+                    <End EntitySet="ZTMS_I_JTHT" Role="ToRole_assoc_EA00B19AB7FC4C9B1EE955C81250F103"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_36164C27746083154E57AB4E161BAC99" Association="ZTMS_C_WBRZ_SRV.assoc_36164C27746083154E57AB4E161BAC99" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZTMS_C_WBRZ" Role="FromRole_assoc_36164C27746083154E57AB4E161BAC99"/>
+                    <End EntitySet="ZTMS_C_JKXZ_VH" Role="ToRole_assoc_36164C27746083154E57AB4E161BAC99"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_F14F13CF60C8D8884BDF92AF9F62901A" Association="ZTMS_C_WBRZ_SRV.assoc_F14F13CF60C8D8884BDF92AF9F62901A" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZTMS_C_WBRZ" Role="FromRole_assoc_F14F13CF60C8D8884BDF92AF9F62901A"/>
+                    <End EntitySet="ZTMS_I_SAPRZLX" Role="ToRole_assoc_F14F13CF60C8D8884BDF92AF9F62901A"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotations Target="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZ_SRV_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Aggregation.ApplySupported">
+                    <Record>
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="None"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZType/belnr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZType/budat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZType/gjahr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZType/monat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZTMS_C_WBRZ_SRV.ZTMS_I_ZJSQ_PZXType/AccountingDocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZTMS_C_WBRZ_SRV.ZTMS_I_ZJSQ_PZXType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZTMS_C_WBRZ_SRV.ZTMS_I_ZJSQ_PZXType/FiscalYear" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZTMS_C_WBRZ_SRV.ZTMS_I_ZJSQ_PZXType/blart" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZTMS_C_WBRZ_SRV.ZTMS_I_ZJSQ_PZXType/budat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZTMS_C_WBRZ_SRV.ZTMS_I_ZJSQ_PZXType/monat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZTMS_C_WBRZ_SRV.ZTMS_I_ZJSQ_PZXType/zdxlx" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZ_SRV_Entities/ZTMS_C_WBRZ" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>ID</PropertyPath>
+                                <PropertyPath>zclx_amt</PropertyPath>
+                                <PropertyPath>wctz</PropertyPath>
+                                <PropertyPath>jtlx_amt</PropertyPath>
+                                <PropertyPath>fyh_amt</PropertyPath>
+                                <PropertyPath>zbh_amt</PropertyPath>
+                                <PropertyPath>zzs</PropertyPath>
+                                <PropertyPath>tzsy</PropertyPath>
+                                <PropertyPath>ht_amt</PropertyPath>
+                                <PropertyPath>whk_amt</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>ID</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZTMS_C_WBRZ_SRV.ZTMS_C_WBRZ_SRV_Entities/ZTMS_I_ZJSQ_PZX" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>AccountingDocumentUrl</PropertyPath>
+                                <PropertyPath>gkbelnr</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>AccountingDocumentUrl</PropertyPath>
+                                <PropertyPath>gkbelnr</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="http://dev.cgdg.com:50015/sap/opu/odata/sap/ZTMS_C_WBRZ_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://dev.cgdg.com:50015/sap/opu/odata/sap/ZTMS_C_WBRZ_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
