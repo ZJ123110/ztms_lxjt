@@ -13,10 +13,10 @@
     <table:AnalyticalColumn width="250px" id="FioriTools::htdj_id_ext">
         <Label text="合同登记单号"/>
         <table:template>
-            <Link id="idHtdjLink" text="{conex}" wrapping="true" press="onHtdjPress"/>
+            <Link id="idHtdjLink" text="{htdj_id}" wrapping="true" press="onHtdjPress"/>
         </table:template>
         <table:customData>
-            <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;htdj_id_ext&quot;, &quot;columnIndex&quot;: &quot;1&quot;, &quot;leadingProperty&quot;: &quot;conex&quot;}"/>
+            <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;htdj_id_ext&quot;, &quot;columnIndex&quot;: &quot;1&quot;, &quot;leadingProperty&quot;: &quot;htdj_id&quot;}"/>
         </table:customData>
     </table:AnalyticalColumn>
     
